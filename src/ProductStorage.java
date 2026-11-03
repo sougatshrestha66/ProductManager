@@ -10,6 +10,26 @@ public class ProductStorage {
         return new ArrayList<>(products.values());
     }
 
+    public List<Product> getProductsByName(String name) {
+        List<Product> result = new ArrayList<>();
+        for (Product product : products.values()) {
+            if (product.getName().toLowerCase().contains(name.toLowerCase())) {
+                result.add(product);
+            }
+        }
+        return result;
+    }
+
+    public void updateProduct(Product updatedProduct) throws ProductNotFoundException {
+        if (updatedProduct == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        }
+        if (!products.containsKey(updatedProduct.getId())) {
+            throw new ProductNotFoundException("Product not found: " + updatedProduct.getId());
+        }
+        products.put(updatedProduct.getId(), updatedProduct);
+    }
+
     public void addProduct(Product product) throws DuplicateProductException {
 
         if (product == null) {
@@ -20,6 +40,7 @@ public class ProductStorage {
         }
         products.put(product.getId(), product);
     }
+
     public Product getProduct(int id) throws ProductNotFoundException {
         Product product = products.get(id);
         if (product == null) {
@@ -29,16 +50,11 @@ public class ProductStorage {
     }
 
     public void deleteProduct(int id) throws ProductNotFoundException {
-        if (!products.containsKey(id)) {
-            throw new ProductNotFoundException("Product Not found:" + id);
+
+        if (products.remove(id) == null) {
+            throw new ProductNotFoundException("Product not found: " + id);
         }
-        products.remove(id);
     }
-    public boolean exists(int id) {
-        return products.containsKey(id);
-    }
-    public int getProductCount() {
-        return products.size();
-    }
+
 
 }
