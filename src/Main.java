@@ -3,7 +3,7 @@
 public static void main(String[] args) throws DuplicateProductException {
     Product p = new Product(1111,"Laptop",2000000,6);
     Product p1 = new Product(2222,"Laptop",2000000,6);
-    ProductStorage ps = new ProductStorage();
+    ProductStorage ps = new HashMapStorage();
     ProductMenu pm = new ProductMenu(ps);
     ps.addProduct(p);
     ps.addProduct(p1);
