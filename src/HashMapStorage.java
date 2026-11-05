@@ -16,9 +16,10 @@ public class HashMapStorage implements ProductStorage {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
+        String searchName = name.toLowerCase();
         List<Product> productList = new ArrayList<>();
         for (Product product : products.values()) {
-            if (product.getName().toLowerCase().contains(name.toLowerCase())) {
+            if (product.getName().toLowerCase().contains(searchName)) {
                 productList.add(product);
             }
         }

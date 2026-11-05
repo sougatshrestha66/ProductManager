@@ -152,13 +152,10 @@ public class ProductMenu {
     public void updateProduct() {
         int id = readInt("Enter product id:");
         try {
-            Product product = productStorage.getProduct(id);
+            productStorage.getProduct(id);
             String name = readString("Enter product name:");
             double price = readDouble("Enter product price:");
             int quantity = readInt("Enter product quantity:");
-            product.setName(name);
-            product.setPrice(price);
-            product.setQuantity(quantity);
             productStorage.updateProduct(new Product(id, name, price, quantity));
             System.out.println("Product updated successfully");
         } catch (IllegalArgumentException | ProductNotFoundException e) {

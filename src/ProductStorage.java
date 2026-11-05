@@ -1,7 +1,6 @@
 import java.util.List;
 
 public interface ProductStorage {
-
     List<Product> getAllProducts();
     List<Product> getProductsByName(String name);
     void addProduct(Product product) throws DuplicateProductException;
